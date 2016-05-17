@@ -6,16 +6,16 @@ MQTT is a protocol like HTTP or HTTPS, but it is simple, secure, fast and based 
 
 #Server Configuration
 
-##install mosca
+##Install mosca
 ```node
 npm install mosca bunyan -g  //remove -g for local installation , installing bunyan for logger
 ```
 create a file named as`server.js`
-##load mosca
+##Load mosca
 ```node
 var mosca = require("mosca");
 ```
-##database settings
+##Database settings
 Mosca supports Mongo and Redis. Though both have similar kind of configuration, this example demonstrates Mongo only.
 ```node
 var dbSettings = {
@@ -25,16 +25,16 @@ var dbSettings = {
     mongo: {}                              //if any mongo specific options needed. I don't have any
   }
 ```
-##server settings
+##Server settings
 Mosca can create mqtt , mqtts (secure) , http , https (secure) servers . Where http and https is created with mqtt attached.
-###create mqtt server
+###Create mqtt server
 ```node
 var serverSettings = {
   port: 1883,                             //default port is 1883 for mqtt
   backend: dbSettings                     //database sttings we have created earlier
 }
 ```
-###create mqtts server
+###Create mqtts server
 to create a mqtts server use `secure` option with `serverSettings`
 ```node
 secure : {
@@ -43,7 +43,7 @@ secure : {
   certPath: {your certpath}              //path of .pem file
   }
 ```
-###create http server
+###Create http server
 to create a http server use `http` option with `serverSettings`
 ```node
 /*
@@ -60,7 +60,7 @@ http: {
   static: './public'
   }
 ```
-###create https server
+###Create https server
 to create a http server use `https` and `credentials` options with `serverSettings`
 ```node
 credentials: {
@@ -73,7 +73,7 @@ https:{
   static : ‘/’, 
 }
 ```
-###create persistence memory
+###Create persistence memory
 to create a persistence memory / session provide `persistence` option with `serverSettings`
 ```node
 /*
@@ -96,16 +96,16 @@ persistence: {
   mongo: {}                           //mongo specific options
 }
 ```
-###status
+###Status
 to get the status (subscribed clients , packages etc.) of the server on every 10s set `status` property to `true`.
 ```node
 stats: true,                        //(optional)  default false 
 ```
-##create server
+##Create server
 ```node
 var server = new mosca.Server(serverSettings);
 ```
-##mosca events
+##Mosca events
 ```node
 //on client connected
 server.on('clientConnected', function(client) {
@@ -170,16 +170,16 @@ function setup() {
 `retain` - retain is also by default false. But if set to true, this message will be treated a bit differently.In that case message will be stored and will be published by the broker whenever a new client will subscribe to the same topic the retain message has (It’s like an welcome  message ) . Remember only the latest retain message will be stored per topic. 
 
 #Client Configuration
-##install mqtt
+##Install mqtt
 ```node
 npm install mqtt@* 
 ```
 create a file named as client.js
-##load mqtt
+##Load mqtt
 ```node
 var mqtt = require('mqtt');
 ```
-##connect with server
+##Connect with server
 to connect with server mqtt has `.connect()` method .
 ```node
 var client = mqtt.connect('mqtt://localhost:1883');
@@ -189,7 +189,7 @@ var client = mqtt.connect('mqtt://localhost:1883');
 `brokerUrl` - is the url of the host. brokerUrl accepts `mqtt` , `mqtts` , `ws` (web socket) , `wss` (secure)  protocols.
 
 `opts` - for secure connections provide options with credentials like this way
-###tls connection
+###Tls connection
 ```node
 var options = {
   port: PORT,
@@ -201,7 +201,7 @@ var options = {
   ca: TRUSTED_CA_LIST
 }
 ```
-###wss connection
+###Wss connection
 ```node
 var options = {
     keepalive: 10,
@@ -226,7 +226,7 @@ use the `option` parameter in this way
 ```node
 var client = mqtt.connect(host,options);
 ```
-##subscribe to a topic
+##Subscribe to a topic
 ```node
 client.subscribe('topic/client', { qos: 1 }, function(err, granted) {
   if (err)
@@ -239,7 +239,7 @@ client can subscribe to more than one topic at a time by providing a object like
 
 `subscribe() ` passes `err` and `granted` as parameters to the callback function. `granted` is an array of object like
 `{topic, qos}`
-##publish 
+##Publish 
 ```node
 //set retain true to deliver a message (like welcome messages) to the newly subscribed client.
 //set qos = 1 to guarantee delivery service implement. 
@@ -249,7 +249,7 @@ client.publish('topic/client', JSON.stringify({ name: "saikat", title: "hajra" }
 });
 ```
 `publish(topic (string) , message (buffer/string) , options (object) , callback (function) )`
-##mqtt events
+##Mqtt events
 ```node
 
 /*** client on connect ***/
@@ -277,7 +277,7 @@ client.on("offline", function(err) {
   console.log("client is offline");
 });
 ```
-##mqtt message
+##Mqtt message
 mqtt has another event `message`.
 ```node
 client.on('message', function(topic, message) {
@@ -308,7 +308,7 @@ client.on('message', function(topic, message) {
 ```
 
 #Usage
-Mqtt is used for real time communication among machines (machine to machine) . It can be used for realtiime chat application, remote machine status update, realtime message broadcast services and any other fields where realtime communication is the first priority. Facebook messanger and few other real life applications are already supported by mqtt.
+Mqtt is used for real time communication among machines (machine to machine) . It can be used for realtiime chat application, remote machine status update, realtime message broadcast services and any other fields where realtime communication is the first priority. Facebook messenger and few other real life applications are already supported by the mqtt.
 
 #License
 Mqtt-Example is under MIT license so feel free to use it!
