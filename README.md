@@ -1,5 +1,5 @@
-#Mqtt-Example
-Mqtt server-client example with [`mosca`](https://github.com/mcollina/mosca) and [`mqtt`](https://github.com/mqttjs/MQTT.js) module
+#Mqtt-Example using javascript , nodejs 
+This is an example of Mqtt server-client implementation with [`mosca`](https://github.com/mcollina/mosca) and [`mqtt`](https://github.com/mqttjs/MQTT.js) module.
 
 #Introduction
 MQTT is a protocol like HTTP or HTTPS, but it is simple, secure, fast and based on TCP/IP . It has two parts broker/server and client. A Client can subscribe to a topic and publish messages, whereas a Broker distributes those messages to the Clients according to their subscription policies.
@@ -21,13 +21,14 @@ Mosca supports Mongo and Redis. Though both have similar kind of configuration, 
 var dbSettings = {
     type: 'mongo',                         //it can be mongo / redis
     url: 'mongodb://localhost:27017/mqtt', //default is localhost:27017,mqtt is the db name
-    pubsubCollection: 'mosca',             //default collection name is pubsub.I prefer naming mosca
-    mongo: {}                              //if any mongo specific options needed. I don't have any
+    pubsubCollection: 'mosca',             //default collection name is pubsub.
+    mongo: {}                              //if any mongo specific options needed.
   }
 ```
 ##Server settings
 Mosca can create mqtt , mqtts (secure) , http , https (secure) servers . Where http and https is created with mqtt attached.
 ###Create mqtt server
+to create a basic mqtt server use this settings
 ```node
 var serverSettings = {
   port: 1883,                             //default port is 1883 for mqtt
@@ -35,7 +36,7 @@ var serverSettings = {
 }
 ```
 ###Create mqtts server
-to create a mqtts server use `secure` option with `serverSettings`
+to create a mqtts server use `secure` property with `serverSettings`
 ```node
 secure : {
   port: 8884                             //provide secure port if any (default 8883 ssl) 
@@ -44,7 +45,7 @@ secure : {
   }
 ```
 ###Create http server
-to create a http server use `http` option with `serverSettings`
+to create a http server use `http` property with `serverSettings`
 ```node
 /*
    - this option will create a http server with mqtt attached. 
@@ -61,7 +62,7 @@ http: {
   }
 ```
 ###Create https server
-to create a http server use `https` and `credentials` options with `serverSettings`
+to create a https server use `https` and `credentials` properties with `serverSettings`
 ```node
 credentials: {
   keyPath: {your keypath},              //path of .pem file
@@ -74,7 +75,7 @@ https:{
 }
 ```
 ###Create persistence memory
-to create a persistence memory / session provide `persistence` option with `serverSettings`
+to create a persistence memory / session provide `persistence` property with `serverSettings`
 ```node
 /*
    - this option will create a session over subscription and packets
@@ -248,7 +249,7 @@ client.publish('topic/client', JSON.stringify({ name: "saikat", title: "hajra" }
   console.log("message published");
 });
 ```
-`publish(topic (string) , message (buffer/string) , options (object) , callback (function) )`
+`publish() `has the following structure `publish(topic (string) , message (buffer/string) , options (object) , callback (function) )`
 ##Mqtt events
 ```node
 
@@ -306,7 +307,8 @@ client.on('message', function(topic, message) {
 </body>
 </html>
 ```
-
+#Tips
+Before integrating MQTT sever-client with any host, please make sure the server provider supports protocol other than http, https. Otherwise `mqtt` will not work. <b>Ex.</b> modulus does not support but AWS supports.   
 #Usage
 Mqtt is used for real time communication among machines (machine to machine) . It can be used for realtiime chat application, remote machine status update, realtime message broadcast services and any other fields where realtime communication is the first priority. Facebook messenger and few other real life applications are already supported by the mqtt.
 
