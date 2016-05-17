@@ -1,0 +1,30 @@
+{
+  "name": "mqtt-test",
+  "version": "1.0.0",
+  "description": "mqtt broker client test",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saikath/mqtt-test.git"
+  },
+  "keywords": [
+    "mqtt",
+    "mqtt test",
+    "mqtt client server",
+    "mqtt example"
+  ],
+  "author": "saikat hajra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saikath/mqtt-test/issues"
+  },
+  "homepage": "https://github.com/saikath/mqtt-test#readme",
+  "dependencies": {
+    "bunyan": "^1.8.0",
+    "mosca": "^1.1.2",
+    "mqtt": "^1.10.0"
+  }
+}
