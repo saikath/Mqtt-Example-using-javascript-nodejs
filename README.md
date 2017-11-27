@@ -316,5 +316,4 @@ Mqtt is used for real time communication among machines (machine to machine) . I
 Mqtt-Example is under MIT license so feel free to use it!
 
 #Author
-Created by [Saikat Hajra](https://github.com/saikath). Please feel free to drop an email if you have any question.
-saikat.hajra@innofied.com  or  hajrasaikat@gmail.com 
+Created by [Saikat Hajra](https://github.com/saikath). Please feel free to drop an email if you have any question at hajrasaikat@gmail.com 
